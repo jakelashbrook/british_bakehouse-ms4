@@ -49,53 +49,60 @@
 <body>
     <header class="fixed-top container-fluid bg-white">
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
-            <a class="navbar-brand text-uppercase" id="nav-logo-link" href="#">British Bakehouse</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand text-uppercase" id="nav-logo-link" href="{% url 'home' %}">British Bakehouse</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active text-uppercase">
-                  <a class="nav-link" title="Home" href="#"><i class="fas fa-home"></i></i> <span class="sr-only">(current)</span></a>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+            <!-- Pages and Store Nav -->
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-lg-3 pl-lg-3">
+                <li class="nav-item {% if request.get_full_path == '/' %}active{% endif %} text-uppercase">
+                  <a class="nav-link" title="Home" href="{% url 'home' %}"><i class="fas fa-home"></i></i> <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item text-uppercase">
+                <li class="nav-item text-uppercase ml-lg-3 pl-lg-3">
                   <a class="nav-link" href="#" title="Shop Now">Bakery</a>
                 </li>
-                <li class="nav-item text-uppercase">
+                <li class="nav-item text-uppercase ml-lg-3 pl-lg-3">
                   <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Contact</a>
                 </li>
-              </ul>
-              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item text-uppercase">
-                  <a class="nav-link" href="#">Account</a>
+              <!-- Account Nav -->
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item text-uppercase ml-lg-3 pl-lg-3">
+                        <a class="nav-link" href="#">Account</a>
+                        </li>
+                            {% if request.user.is_superuser %}
+                            <li class="nav-item text-uppercase ml-lg-3 pl-lg-3">
+                                <a class="nav-link" title="Home" href="#">Store Admin</a>
+                            </li>
+                            {% endif %}
+                        {% endif %}
+                
+              <!-- Session Nav -->
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item text-uppercase ml-lg-3 pl-lg-3 {% if request.resolver_match.view_name == 'account_logout' %}active{% endif %}">
+                      <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item text-uppercase ml-lg-3 pl-lg-3 {% if request.resolver_match.view_name == 'account_login' %}active{% endif %}">
+                        <a class="nav-link" title="Home" href="{% url 'account_login' %}">Login</a>
+                      </li>
+                    <li class="nav-item text-uppercase ml-lg-3 pl-lg-3 {% if request.resolver_match.view_name == 'account_signup' %}active{% endif %}">
+                      <a class="nav-link" href="{% url 'account_signup' %}" tabindex="-1" aria-disabled="true">Register</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item text-uppercase ml-lg-3 pl-lg-3">
+                    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true" title="Shopping basket"><i class="fas fa-shopping-basket"></i></a>
                 </li>
-                <li class="nav-item text-uppercase">
-                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Basket</a>
-                </li>
-                <li class="nav-item text-uppercase">
-                    <a class="nav-link" title="Home" href="#">Store Admin</a>
-                  </li>
-              </ul>
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item text-uppercase">
-                      <a class="nav-link" title="Home" href="#">Login</a>
-                    </li>
-                    <li class="nav-item text-uppercase">
-                      <a class="nav-link" href="#">Logout</a>
-                    </li>
-                    <li class="nav-item text-uppercase">
-                      <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Register</a>
-                    </li>
                   </ul>
-              
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control-lg mr-sm-2 rounded-0 btn-outline-blue" type="search" placeholder="Search the bakery.." aria-label="Search">
-                <button class="btn btn-lg btn-outline-blue my-2 my-sm-0 rounded-0" type="submit">
-                    <i class="fas fa-search text-blue"></i>
-                </button>
-              </form>
+                  <form method="GET" action="" class="form-inline">
+                    <input class="form-control-lg mr-sm-2 rounded-0 btn-outline-blue float-right" type="search" placeholder="Search the bakery.." aria-label="Search">
+                    <button class="btn btn-lg btn-outline-blue my-2 my-sm-0 rounded-0 float-right" type="submit">
+                        <i class="fas fa-search text-blue"></i>
+                    </button>
+                  </form>
             </div>
           </nav>
+              
     </header>
 
     {% if messages %}

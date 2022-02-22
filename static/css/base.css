@@ -92,12 +92,6 @@ img {
     border: 1.5px solid #002db3 !important;
 }
 
-/* Input placeholder color set */
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #002db3 !important;
-    opacity: 1; /* Firefox */
-  }
-
 /* Media Queries   - Originally taken from Boutique Ado Project   */
 
 /* Slightly larger container on xl screens */
