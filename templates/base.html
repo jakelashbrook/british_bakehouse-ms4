@@ -14,8 +14,14 @@
     {% endblock %}
 
     {% block main_css %}
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Shizuru&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% endblock %}
 
     {% block extra_css %}
@@ -41,67 +47,55 @@
 </head>
 
 <body>
-    <header class="fixed-top container-fluid">
-        <div class="row">
-            <!-- Search Bar-->
-            <div class="col-12 col-lg-4 my-auto p-lg-3 order-2 order-lg-1">
-                <form method="GET" action="" class="form-inline">
-                    <div class="input-group w-100">
-                        <input class="form-control mr-sm-2 rounded-0 border-blue border" type="search"
-                            placeholder="Search our bakery now.." aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-blue my-2 my-sm-0 rounded-0" type="submit">
-                                <span class="icon">
-                                    <i class="fas fa-search"></i>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+    <header class="fixed-top container-fluid bg-white">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <a class="navbar-brand text-uppercase" id="nav-logo-link" href="#">British Bakehouse</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active text-uppercase">
+                  <a class="nav-link" title="Home" href="#"><i class="fas fa-home"></i></i> <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item text-uppercase">
+                  <a class="nav-link" href="#" title="Shop Now">Bakery</a>
+                </li>
+                <li class="nav-item text-uppercase">
+                  <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Contact</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item text-uppercase">
+                  <a class="nav-link" href="#">Account</a>
+                </li>
+                <li class="nav-item text-uppercase">
+                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Basket</a>
+                </li>
+                <li class="nav-item text-uppercase">
+                    <a class="nav-link" title="Home" href="#">Store Admin</a>
+                  </li>
+              </ul>
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item text-uppercase">
+                      <a class="nav-link" title="Home" href="#">Login</a>
+                    </li>
+                    <li class="nav-item text-uppercase">
+                      <a class="nav-link" href="#">Logout</a>
+                    </li>
+                    <li class="nav-item text-uppercase">
+                      <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Register</a>
+                    </li>
+                  </ul>
+              
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control-lg mr-sm-2 rounded-0 btn-outline-blue" type="search" placeholder="Search the bakery.." aria-label="Search">
+                <button class="btn btn-lg btn-outline-blue my-2 my-sm-0 rounded-0" type="submit">
+                    <i class="fas fa-search text-blue"></i>
+                </button>
+              </form>
             </div>
-            <!-- Logo -->
-            <div class="col-12 col-lg-4 my-auto p-lg-3 text-center order-1 order-lg-2">
-                <a class="navbar-brand nav-logo-link text-uppercase" href="#">British Bakehouse</a>
-            </div>
-            <!-- Account/Bag -->
-            <div class="col-12 col-lg-4 my-auto p-3 py-lg-0 order-3 order-lg-3">
-                <ul class="list-inline list-unstyled text-center">
-                    <li class="list-inline-item dropdown">
-                        <a href="#" class="nav-link text-blue" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="text-center">
-                                <div><i class="fas fa-user" title="My Account"></i></div>
-                            </div>
-                        </a>
-                        <div class="dropdown-menu border-0" aria-labelledby="user-options">
-                            {% if request.user.is_authenticated %}
-                                {% if request.user.is_superuser %}
-                                    <a href="" class="dropdown-item">Bakery Management</a>
-                                {% endif %}
-                                <a href="" class="dropdown-item">Profile</a>
-                                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-                            {% else %}
-                                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
-                            {% endif %}
-                        </div>
-                    </li> 
-                    <li class="list-inline-item">
-                        <a href="#" class="{% if grand_total %}text-info font-weight-bold{% else %}text-blue{% endif %} nav-link">
-                            <div class="text-center">
-                                <div><i class="fas fa-bag-shopping"></i></div>
-                                <p class="my-0">
-                                    {% if grand_total %}
-                                        £{{ grand_total|floatformat:2 }}
-                                    {% else %}
-                                        £0.00
-                                    {% endif %}
-                                </p>
-                            </div>
-                        </a>
-                    </li> 
-                </ul>
-            </div>
-        </div>
+          </nav>
     </header>
 
     {% if messages %}

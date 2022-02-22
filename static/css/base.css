@@ -1,0 +1,125 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: calc(100vh - 164px); /* Detract the height of the main page header when completed*/
+    color: #000;
+    font-family: 'Roboto Condensed';
+}
+
+#hero-carousel {
+    height: 80vh;
+    margin: 0;
+    padding: 0;
+}
+
+.carousel-item img {
+    width: fit-content;
+    height: 80vh;
+}
+
+.carousel-caption {
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+/* Copied from CSS Tricks - Robin Rendle */
+img {
+    image-rendering: auto;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+  
+    /* Safari seems to support, but seems deprecated and does the same thing as the others. */
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+.bg-white {
+    background-color: white !important;
+}
+
+/* Navigation logo link */
+#nav-logo-link {
+    font-family: 'Shizuru'!important;
+    width: fit-content;
+    color: #002db3;
+    font-size: 28px;
+    text-shadow: 1.5px 1.5px #ab4b52;
+    font-weight: 400;
+    }
+
+
+
+.buy-now-btn {
+    background-color: #002db3 !important; /* Blue of UK Flag */;
+    color: #ffffff;
+    min-width: 222px;
+}
+
+.btn-blue {
+    background-color: #002db3 !important; /* Blue of UK Flag */;
+    color: #ffffff;
+}
+
+.btn-outline-blue {
+    border: 1px solid #002db3;
+}
+
+.buy-now-btn:hover,
+.buy-now-btn:active,
+.btn-blue:hover,
+.btn-blue:active,
+.btn-blue:focus {
+    background-color: #0000ff;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.text-black {
+    color: #000 !important;
+}
+
+.text-blue {
+    color: #002db3 !important;
+}
+
+.border-black {
+    border: 1.5px solid black !important;
+}
+
+.border-blue {
+    border: 1.5px solid #002db3 !important;
+}
+
+/* Input placeholder color set */
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #002db3 !important;
+    opacity: 1; /* Firefox */
+  }
+
+/* Media Queries   - Originally taken from Boutique Ado Project   */
+
+/* Slightly larger container on xl screens */
+@media (min-width: 1200px) {
+    .container {
+      max-width: 80%;
+    }
+  }
+  
+  /* fixed top navbar only on medium and up */
+  @media (min-width: 992px) {
+      .fixed-top-desktop-only {
+          position: fixed;
+          top: 0;
+          right: 0;
+          left: 0;
+          z-index: 1030;
+      }
+  
+      .header-container {
+          padding-top: 164px;
+      }
+
+  }
+  © 2022 GitHub, Inc.
